@@ -9,12 +9,12 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-
   @override
   void initState() {
     super.initState();
     new Timer(const Duration(seconds: 3), onClose);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,12 +22,17 @@ class _LandingPageState extends State<LandingPage> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 30,),
+            SizedBox(
+              height: 30,
+            ),
             Padding(
               padding: const EdgeInsets.all(30.0),
-              child: Center(child: Image(image: AssetImage('assets/images/logo.png'))),
+              child: Center(
+                  child: Image(image: AssetImage('assets/images/logo.png'))),
             ),
-            SizedBox(height: 80,),
+            SizedBox(
+              height: 120,
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Text(
@@ -35,7 +40,7 @@ class _LandingPageState extends State<LandingPage> {
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 24,
-
+                  color: Colors.white,
                 ),
               ),
             )
@@ -59,7 +64,3 @@ class _LandingPageState extends State<LandingPage> {
         }));
   }
 }
-
-
-
-
