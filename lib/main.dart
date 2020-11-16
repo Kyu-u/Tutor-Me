@@ -5,6 +5,7 @@ import 'package:tutor_me/pages/signUp1.dart';
 void main() => runApp(MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => SignUp1(),
+        '/': (context) => LandingPage(),
+        '/signup1': (context) => SignUp1(),
       },
     ));
