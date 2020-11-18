@@ -13,15 +13,23 @@ class _GenderState extends State<Gender> {
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.fromLTRB(30, 5, 30, 5),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(15),
         color: Colors.white,
       ),
       child: DropdownButton<String>(
+        style: TextStyle(
+            fontFamily: 'Montserrat', fontSize: 15, color: Colors.black),
+        underline: Container(
+          color: Colors.white,
+        ),
         items: [
           DropdownMenuItem<String>(
             child: Text(
               'Male',
-              style: TextStyle(fontFamily: 'Montserrat', fontSize: 15),
+              style: TextStyle(
+                fontFamily: 'Montserrat',
+                fontSize: 15,
+              ),
             ),
             value: 'one',
           ),

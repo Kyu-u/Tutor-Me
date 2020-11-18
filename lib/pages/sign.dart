@@ -26,16 +26,16 @@ class Sign extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    // fontWeight: FontWeight.bold,
                     color: HexColor("6088f6"),
                   ),
                 ),
                 padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.circular(15)),
               ),
               SizedBox(
-                height: 120,
+                height: 80,
               ),
               RichText(
                 text: TextSpan(children: [

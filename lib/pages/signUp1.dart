@@ -45,144 +45,127 @@ class _SignUp1State extends State<SignUp1> {
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white,
+                    TextFormField(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 15,
                       ),
-                      child: TextFormField(
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 15,
-                        ),
-                        decoration: InputDecoration(
-                            // labelText: 'Name',
-                            hintText: 'Name',
-                            alignLabelWithHint: false,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () => node.nextFocus(),
-                        validator: (String name) {
-                          Pattern pattern =
-                              r'^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$';
-                          RegExp regex = new RegExp(pattern);
-                          if (!regex.hasMatch(name))
-                            return 'Invalid username';
-                          else
-                            return null;
-                        },
-                      ),
+                      decoration: InputDecoration(
+                          // labelText: 'Name',
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintText: 'Name',
+                          alignLabelWithHint: false,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () => node.nextFocus(),
+                      validator: (String name) {
+                        Pattern pattern =
+                            r'^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$';
+                        RegExp regex = new RegExp(pattern);
+                        if (!regex.hasMatch(name))
+                          return 'Invalid username';
+                        else
+                          return null;
+                      },
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white,
+                    TextFormField(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 15,
                       ),
-                      child: TextFormField(
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 15,
-                        ),
-                        decoration: InputDecoration(
-
-                            // labelText: 'Name',
-                            hintText: 'E-mail',
-                            alignLabelWithHint: false,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () => node.nextFocus(),
-                        controller: _email,
-                        validator: (String email) =>
-                            EmailValidator.validate(email)
-                                ? null
-                                : "Invalid email address",
-                      ),
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          // labelText: 'Name',
+                          hintText: 'E-mail',
+                          alignLabelWithHint: false,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () => node.nextFocus(),
+                      controller: _email,
+                      validator: (String email) =>
+                          EmailValidator.validate(email)
+                              ? null
+                              : "Invalid email address",
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white,
+                    TextFormField(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 15,
                       ),
-                      child: TextFormField(
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 15,
-                        ),
-                        decoration: InputDecoration(
-                            // labelText: 'Name',
-                            hintText: 'Confirm E-mail',
-                            alignLabelWithHint: false,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () => node.nextFocus(),
-                        controller: _confirmEmail,
-                        validator: (email) => email == _email.text
-                            ? null
-                            : "Invalid email address",
-                      ),
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          // labelText: 'Name',
+                          hintText: 'Confirm E-mail',
+                          alignLabelWithHint: false,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () => node.nextFocus(),
+                      controller: _confirmEmail,
+                      validator: (email) =>
+                          email != _email.text ? "Invalid email address" : null,
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white,
+                    TextFormField(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 15,
                       ),
-                      child: TextFormField(
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 15,
-                        ),
-                        decoration: InputDecoration(
-                            // labelText: 'Name',
-                            hintText: 'Password',
-                            alignLabelWithHint: false,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () => node.nextFocus(),
-                        controller: _pass,
-                        validator: (String value) {
-                          return value.isEmpty ? 'Please enter a name' : null;
-                        },
-                      ),
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          // labelText: 'Name',
+                          hintText: 'Password',
+                          alignLabelWithHint: false,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () => node.nextFocus(),
+                      controller: _pass,
+                      validator: (password) {
+                        Pattern pattern =
+                            r'^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$';
+                        RegExp regex = new RegExp(pattern);
+                        if (!regex.hasMatch(password))
+                          return 'Invalid password';
+                        else
+                          return null;
+                      },
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white,
+                    TextFormField(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 15,
                       ),
-                      child: TextFormField(
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 15,
-                        ),
-                        decoration: InputDecoration(
-                            // labelText: 'Name',
-                            hintText: 'Confirm password',
-                            alignLabelWithHint: false,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () => node.nextFocus(),
-                        controller: _confirmPass,
-                        validator: (String value) {
-                          return value.isEmpty ? 'Please enter a name' : null;
-                        },
-                      ),
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          // labelText: 'Name',
+                          hintText: 'Confirm password',
+                          alignLabelWithHint: false,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () => node.nextFocus(),
+                      controller: _confirmPass,
+                      validator: (value) =>
+                          value != _pass.text ? "Invalid password" : null,
                     ),
                     SizedBox(
                       height: 20,
@@ -201,6 +184,7 @@ class _SignUp1State extends State<SignUp1> {
                             print(_email.text);
                             if (_formKey.currentState.validate()) {
                               _formKey.currentState.save();
+                              Navigator.pushNamed(context, '/signup2');
                             }
                           },
                           child: Text(
