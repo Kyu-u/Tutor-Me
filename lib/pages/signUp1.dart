@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tutor_me/buttons/genderbutton.dart';
+import 'package:email_validator/email_validator.dart';
 
 class SignUp1 extends StatefulWidget {
   @override
@@ -8,10 +9,15 @@ class SignUp1 extends StatefulWidget {
 }
 
 class _SignUp1State extends State<SignUp1> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _pass = TextEditingController();
+  final TextEditingController _confirmPass = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _confirmEmail = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
-    final myController = TextEditingController();
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: HexColor("6088f6"),
@@ -20,67 +26,61 @@ class _SignUp1State extends State<SignUp1> {
           children: [
             Padding(
               padding: EdgeInsets.fromLTRB(20, 5, 40, 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Sign Up',
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 40,
-                            color: Colors.white),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 20,
                     ),
-                    child: TextFormField(
+                    Text(
+                      'Sign Up',
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 40,
+                          color: Colors.white),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 15,
                       ),
                       decoration: InputDecoration(
                           // labelText: 'Name',
+                          filled: true,
+                          fillColor: Colors.white,
                           hintText: 'Name',
                           alignLabelWithHint: false,
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15))),
                       textInputAction: TextInputAction.next,
                       onEditingComplete: () => node.nextFocus(),
-                      validator: (String value) {
-                        return value.isEmpty ? 'Please enter a name' : null;
+                      validator: (String name) {
+                        Pattern pattern =
+                            r'^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$';
+                        RegExp regex = new RegExp(pattern);
+                        if (!regex.hasMatch(name))
+                          return 'Invalid username';
+                        else
+                          return null;
                       },
-                      controller: myController,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
+                    SizedBox(
+                      height: 20,
                     ),
-                    child: TextFormField(
+                    TextFormField(
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 15,
                       ),
                       decoration: InputDecoration(
-
+                          filled: true,
+                          fillColor: Colors.white,
                           // labelText: 'Name',
                           hintText: 'E-mail',
                           alignLabelWithHint: false,
@@ -88,25 +88,23 @@ class _SignUp1State extends State<SignUp1> {
                               borderRadius: BorderRadius.circular(15))),
                       textInputAction: TextInputAction.next,
                       onEditingComplete: () => node.nextFocus(),
-                      validator: (String value) {
-                        return value.isEmpty ? 'Please enter a name' : null;
-                      },
+                      controller: _email,
+                      validator: (String email) =>
+                          EmailValidator.validate(email)
+                              ? null
+                              : "Invalid email address",
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
+                    SizedBox(
+                      height: 20,
                     ),
-                    child: TextFormField(
+                    TextFormField(
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 15,
                       ),
                       decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
                           // labelText: 'Name',
                           hintText: 'Confirm E-mail',
                           alignLabelWithHint: false,
@@ -114,25 +112,21 @@ class _SignUp1State extends State<SignUp1> {
                               borderRadius: BorderRadius.circular(15))),
                       textInputAction: TextInputAction.next,
                       onEditingComplete: () => node.nextFocus(),
-                      validator: (String value) {
-                        return value.isEmpty ? 'Please enter a name' : null;
-                      },
+                      controller: _confirmEmail,
+                      validator: (email) =>
+                          email != _email.text ? "Invalid email address" : null,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
+                    SizedBox(
+                      height: 20,
                     ),
-                    child: TextFormField(
+                    TextFormField(
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 15,
                       ),
                       decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
                           // labelText: 'Name',
                           hintText: 'Password',
                           alignLabelWithHint: false,
@@ -140,25 +134,28 @@ class _SignUp1State extends State<SignUp1> {
                               borderRadius: BorderRadius.circular(15))),
                       textInputAction: TextInputAction.next,
                       onEditingComplete: () => node.nextFocus(),
-                      validator: (String value) {
-                        return value.isEmpty ? 'Please enter a name' : null;
+                      controller: _pass,
+                      validator: (password) {
+                        Pattern pattern =
+                            r'^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$';
+                        RegExp regex = new RegExp(pattern);
+                        if (!regex.hasMatch(password))
+                          return 'Invalid password';
+                        else
+                          return null;
                       },
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
+                    SizedBox(
+                      height: 20,
                     ),
-                    child: TextFormField(
+                    TextFormField(
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 15,
                       ),
                       decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
                           // labelText: 'Name',
                           hintText: 'Confirm password',
                           alignLabelWithHint: false,
@@ -166,41 +163,46 @@ class _SignUp1State extends State<SignUp1> {
                               borderRadius: BorderRadius.circular(15))),
                       textInputAction: TextInputAction.next,
                       onEditingComplete: () => node.nextFocus(),
-                      validator: (String value) {
-                        return value.isEmpty ? 'Please enter a name' : null;
-                      },
+                      controller: _confirmPass,
+                      validator: (value) =>
+                          value != _pass.text ? "Invalid password" : null,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Gender(),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      FlatButton(
-                        color: HexColor("4ED1A1"),
-                        onPressed: () {
-                          print('adwada');
-                        },
-                        child: Text(
-                          "Next",
-                          style: TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 15,
-                            color: Colors.white,
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Gender(),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        FlatButton(
+                          color: HexColor("4ED1A1"),
+                          onPressed: () {
+                            // print('adwada');
+                            print(_email.text);
+                            if (_formKey.currentState.validate()) {
+                              _formKey.currentState.save();
+                              Navigator.pushNamed(context, '/signup2');
+                            }
+                          },
+                          child: Text(
+                            "Next",
+                            style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),
                           ),
+                          padding: EdgeInsets.fromLTRB(30, 5, 30, 5),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
                         ),
-                        padding: EdgeInsets.fromLTRB(30, 5, 30, 5),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

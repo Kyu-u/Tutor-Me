@@ -3,13 +3,12 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/gestures.dart';
 
 class Sign extends StatelessWidget {
-  final TapGestureRecognizer _gestureRecognizer = TapGestureRecognizer()
-    ..onTap = () {
-      debugPrint("hello world");
-    };
-
   @override
   Widget build(BuildContext context) {
+    final TapGestureRecognizer _gestureRecognizer = TapGestureRecognizer()
+      ..onTap = () {
+        print("tapped");
+      };
     return Scaffold(
       backgroundColor: HexColor("6088f6"),
       body: SafeArea(
@@ -18,24 +17,25 @@ class Sign extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FlatButton(
+                color: Colors.white,
                 onPressed: () {
-                  print("tapped");
+                  Navigator.pushNamed(context, '/signup1');
                 },
                 child: Text(
                   "Sign up",
                   style: TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    // fontWeight: FontWeight.bold,
                     color: HexColor("6088f6"),
                   ),
                 ),
                 padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.circular(15)),
               ),
               SizedBox(
-                height: 120,
+                height: 80,
               ),
               RichText(
                 text: TextSpan(children: [
