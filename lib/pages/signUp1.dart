@@ -17,7 +17,6 @@ class _SignUp1State extends State<SignUp1> {
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
-
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: HexColor("6088f6"),

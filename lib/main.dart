@@ -7,7 +7,7 @@ import 'package:tutor_me/pages/signin.dart';
 void main() => runApp(MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => SignIn(),
+        '/': (context) => SignUp1(),
         '/signup1': (context) => SignUp1(),
         '/signup2': (context) => SignUp2(),
       },
