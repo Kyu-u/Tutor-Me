@@ -114,6 +114,7 @@ class _EditProfile2State extends State<EditProfile2> {
                     SizedBox(
                       height: 50,
                     ),
+                    //name
                     Padding(
                       padding: const EdgeInsets.fromLTRB(30, 0, 38, 5),
                       child: Row(
