@@ -12,6 +12,9 @@ class _EditProfile2State extends State<EditProfile2> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _gpa = TextEditingController();
   final TextEditingController _phone = TextEditingController();
+
+  String _valStatus;
+  List _status = ["Undergraduate", "Bachelor", "Graduate"];
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
@@ -139,8 +142,6 @@ class _EditProfile2State extends State<EditProfile2> {
                                       hintText: 'Change your name',
                                       hintStyle:
                                           TextStyle(color: HexColor("#CBBDBD")),
-                                      // fillColor: HexColor("#6088F6"),
-                                      // filled: true,
                                       alignLabelWithHint: false,
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
@@ -211,6 +212,43 @@ class _EditProfile2State extends State<EditProfile2> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(20),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(30, 0, 38, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Status',
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 24,
+                                  color: Colors.white),
+                            ),
+                            SizedBox(
+                              width: 50,
+                            ),
+                            DropdownButton(
+                                value: _valStatus,
+                                items: _status
+                                    .map((value) => DropdownMenuItem(
+                                          child: Text(value),
+                                          value: value,
+                                        ))
+                                    .toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    _valStatus = value;
+                                  });
+                                })
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -315,7 +353,6 @@ class _EditProfile2State extends State<EditProfile2> {
                                   }
                                   return null;
                                 }),
-                            //gegegegegenajajsdnaksjdnkjnnnnnnnnnnnnnnnnnnnnnonnon
                           ),
                         ],
                       ),
