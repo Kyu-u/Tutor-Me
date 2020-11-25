@@ -13,8 +13,8 @@ class _EditProfile2State extends State<EditProfile2> {
   final TextEditingController _gpa = TextEditingController();
   final TextEditingController _phone = TextEditingController();
 
-  String _valStatus;
-  List _status = ["Undergraduate", "Bachelor", "Graduate"];
+  String _value;
+  // List _status = ["Undergraduate", "Bachelor", "Graduate"];
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
@@ -114,7 +114,6 @@ class _EditProfile2State extends State<EditProfile2> {
                     SizedBox(
                       height: 50,
                     ),
-                    //name
                     Padding(
                       padding: const EdgeInsets.fromLTRB(30, 0, 38, 5),
                       child: Row(
@@ -218,38 +217,78 @@ class _EditProfile2State extends State<EditProfile2> {
                     SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      margin: EdgeInsets.all(20),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 0, 38, 0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Status',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 24,
-                                  color: Colors.white),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 0, 38, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Status',
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 24,
+                                color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: 50,
+                          ),
+                          Container(
+                            child: DropdownButton<String>(
+                              isExpanded: true,
+                              underline: Container(
+                                color: Colors.white,
+                              ),
+                              items: [
+                                DropdownMenuItem<String>(
+                                  child: Text(
+                                    "Undergraduate",
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  value: 'one',
+                                ),
+                                DropdownMenuItem<String>(
+                                  child: Text(
+                                    "Bachelor",
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  value: 'two',
+                                ),
+                                DropdownMenuItem<String>(
+                                  child: Text(
+                                    "Graduate",
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  value: 'three',
+                                ),
+                              ],
+                              onChanged: (String value) {
+                                setState(() {
+                                  _value = value;
+                                });
+                              },
+                              hint: Text(
+                                'Title',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
+                              value: _value,
                             ),
-                            SizedBox(
-                              width: 50,
-                            ),
-                            DropdownButton(
-                                value: _valStatus,
-                                items: _status
-                                    .map((value) => DropdownMenuItem(
-                                          child: Text(value),
-                                          value: value,
-                                        ))
-                                    .toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    _valStatus = value;
-                                  });
-                                })
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(
