@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:tutor_me/services/auth..dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool _obscureText = true;
+  final AuthService _auth = AuthService();
 
   // Toggles the password show status
   void _toggle() {
@@ -125,11 +127,17 @@ class _SignInState extends State<SignIn> {
                       ),
                       FlatButton(
                         color: Colors.white,
-                        onPressed: () {
-                          print('hi');
+                        onPressed: () async {
+                          dynamic result = await _auth.signInAnon();
+                          if (result == null) {
+                            print("error signing i");
+                          } else {
+                            print("signed in");
+                            print(result.uid);
+                          }
                         },
                         child: Text(
-                          "Login",
+                          "Sign in",
                           style: TextStyle(
                             fontFamily: "Montserrat",
                             fontSize: 20,
