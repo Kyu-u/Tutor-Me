@@ -9,43 +9,54 @@ class _GenderState extends State<Gender> {
   String _value;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.centerLeft,
-      padding: EdgeInsets.fromLTRB(30, 5, 30, 5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
-      ),
-      child: DropdownButton<String>(
-        style: TextStyle(
-            fontFamily: 'Montserrat', fontSize: 15, color: Colors.black),
-        underline: Container(
-          color: Colors.white,
+    return DropdownButtonFormField<String>(
+      itemHeight: 300,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        enabledBorder: UnderlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white),
         ),
-        items: [
-          DropdownMenuItem<String>(
-            child: Text(
-              'Male',
-              style: TextStyle(
-                fontFamily: 'Montserrat',
-                fontSize: 15,
-              ),
-            ),
-            value: 'one',
-          ),
-          DropdownMenuItem<String>(
-            child: Text('Female'),
-            value: 'two',
-          ),
-        ],
-        onChanged: (String value) {
-          setState(() {
-            _value = value;
-          });
-        },
-        hint: Text('Gender'),
-        value: _value,
+        errorBorder: UnderlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.white),
+        ),
       ),
+      isExpanded: true,
+      style: TextStyle(
+          fontFamily: 'Montserrat', fontSize: 15, color: Colors.black),
+      // underline: Container(
+      //   color: Colors.white,
+      // ),
+      items: [
+        DropdownMenuItem<String>(
+          child: Text(
+            'Male',
+            style: TextStyle(
+              fontFamily: 'Montserrat',
+              fontSize: 15,
+            ),
+          ),
+          value: 'one',
+        ),
+        DropdownMenuItem<String>(
+          child: Text('Female'),
+          value: 'two',
+        ),
+      ],
+      validator: (value) => value == null ? 'Please fill in your gender' : null,
+      onChanged: (String value) {
+        setState(() {
+          _value = value;
+        });
+      },
+      hint: Text('Gender'),
+      value: _value,
     );
   }
 }
