@@ -12,6 +12,9 @@ class _EditProfile2State extends State<EditProfile2> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _gpa = TextEditingController();
   final TextEditingController _phone = TextEditingController();
+
+  String _value;
+  // List _status = ["Undergraduate", "Bachelor", "Graduate"];
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
@@ -139,8 +142,6 @@ class _EditProfile2State extends State<EditProfile2> {
                                       hintText: 'Change your name',
                                       hintStyle:
                                           TextStyle(color: HexColor("#CBBDBD")),
-                                      // fillColor: HexColor("#6088F6"),
-                                      // filled: true,
                                       alignLabelWithHint: false,
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
@@ -208,6 +209,83 @@ class _EditProfile2State extends State<EditProfile2> {
                                   EmailValidator.validate(email)
                                       ? null
                                       : "Invalid email address",
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 0, 38, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Status',
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 24,
+                                color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: 50,
+                          ),
+                          Container(
+                            child: DropdownButton<String>(
+                              isExpanded: true,
+                              underline: Container(
+                                color: Colors.white,
+                              ),
+                              items: [
+                                DropdownMenuItem<String>(
+                                  child: Text(
+                                    "Undergraduate",
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  value: 'one',
+                                ),
+                                DropdownMenuItem<String>(
+                                  child: Text(
+                                    "Bachelor",
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  value: 'two',
+                                ),
+                                DropdownMenuItem<String>(
+                                  child: Text(
+                                    "Graduate",
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  value: 'three',
+                                ),
+                              ],
+                              onChanged: (String value) {
+                                setState(() {
+                                  _value = value;
+                                });
+                              },
+                              hint: Text(
+                                'Title',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
+                              value: _value,
                             ),
                           ),
                         ],
