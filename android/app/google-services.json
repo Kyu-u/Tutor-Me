@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "706109130645",
+    "firebase_url": "https://tutor-me-7bb58.firebaseio.com",
+    "project_id": "tutor-me-7bb58",
+    "storage_bucket": "tutor-me-7bb58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706109130645:android:1ea6b03bb211f99f3f189c",
+        "android_client_info": {
+          "package_name": "com.tutor_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706109130645-s3jm8gbn8lo7h9v7163t8vceqg143n4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBptgBrgxaa4dHQphEmsIaDmusQ-nYPLlw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706109130645-s3jm8gbn8lo7h9v7163t8vceqg143n4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
