@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tutor_me/services/auth..dart';
+import 'HomeLayoutNew.dart';
+import 'package:tutor_me/main.dart';
+import 'package:tutor_me/pages/HomeLayoutNew.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -10,6 +13,8 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool _obscureText = true;
+  String email;
+  String password;
   final AuthService _auth = AuthService();
 
   // Toggles the password show status
@@ -48,6 +53,11 @@ class _SignInState extends State<SignIn> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 37, 0),
                         child: TextFormField(
+                          onChanged: (val) {
+                            setState(() {
+                              email = val;
+                            });
+                          },
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 15,
@@ -80,6 +90,11 @@ class _SignInState extends State<SignIn> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 37, 0),
                         child: TextFormField(
+                          onChanged: (val) {
+                            setState(() {
+                              password = val;
+                            });
+                          },
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 15,
@@ -128,12 +143,13 @@ class _SignInState extends State<SignIn> {
                       FlatButton(
                         color: Colors.white,
                         onPressed: () async {
-                          dynamic result = await _auth.signInAnon();
+                          dynamic result = await _auth.signIn(email, password);
                           if (result == null) {
                             print("error signing i");
                           } else {
                             print("signed in");
                             print(result.uid);
+                            Navigator.pushNamed(context, '/home1');
                           }
                         },
                         child: Text(

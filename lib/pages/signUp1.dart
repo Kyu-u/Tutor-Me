@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tutor_me/buttons/genderbutton.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:tutor_me/services/auth..dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tutor_me/services/database.dart';
+import 'package:provider/provider.dart';
+import 'package:tutor_me/models/user.dart';
 
 class SignUp1 extends StatefulWidget {
   @override
@@ -9,13 +14,18 @@ class SignUp1 extends StatefulWidget {
 }
 
 class _SignUp1State extends State<SignUp1> {
+  final CollectionReference users = Firestore.instance.collection('users');
+  String gender;
+  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _name = TextEditingController();
   final TextEditingController _pass = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _confirmEmail = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     final node = FocusScope.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -59,6 +69,7 @@ class _SignUp1State extends State<SignUp1> {
                               borderRadius: BorderRadius.circular(15))),
                       textInputAction: TextInputAction.next,
                       onEditingComplete: () => node.nextFocus(),
+                      controller: _name,
                       validator: (String name) {
                         Pattern pattern =
                             r'^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$';
@@ -169,7 +180,58 @@ class _SignUp1State extends State<SignUp1> {
                     SizedBox(
                       height: 20,
                     ),
-                    Gender(),
+                    DropdownButtonFormField<String>(
+                      itemHeight: 300,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        enabledBorder: UnderlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        errorBorder: UnderlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                      ),
+                      isExpanded: true,
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 15,
+                          color: Colors.black),
+                      // underline: Container(
+                      //   color: Colors.white,
+                      // ),
+                      items: [
+                        DropdownMenuItem<String>(
+                          child: Text(
+                            'Male',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 15,
+                            ),
+                          ),
+                          value: 'Male',
+                        ),
+                        DropdownMenuItem<String>(
+                          child: Text('Female'),
+                          value: 'Female',
+                        ),
+                      ],
+                      validator: (value) =>
+                          value == null ? 'Please fill in your gender' : null,
+                      onChanged: (String value) {
+                        setState(() {
+                          gender = value;
+                        });
+                      },
+                      hint: Text('Gender'),
+                      value: gender,
+                    ),
                     SizedBox(
                       height: 30,
                     ),
@@ -178,12 +240,21 @@ class _SignUp1State extends State<SignUp1> {
                       children: [
                         FlatButton(
                           color: HexColor("4ED1A1"),
-                          onPressed: () {
+                          onPressed: () async {
                             // print('adwada');
                             print(_email.text);
                             if (_formKey.currentState.validate()) {
                               _formKey.currentState.save();
-                              Navigator.pushNamed(context, '/signup2');
+                              dynamic result =
+                                  await _auth.register(_email.text, _pass.text);
+                              print(result.uid);
+                              await DatabaseService(uid: result.uid)
+                                  .updateName(_name.text);
+                              // await DatabaseService(uid: result.uid)
+                              //     .updateGender(gender);
+
+                              if (result != null)
+                                Navigator.pushNamed(context, '/signup2');
                             }
                           },
                           child: Text(

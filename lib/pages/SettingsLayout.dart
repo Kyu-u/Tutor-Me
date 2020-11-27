@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:tutor_me/services/auth..dart';
+import 'package:tutor_me/wrapper.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ double custFontSize = 15;
 int _value = 0;
 
 class _SettingsState extends State<Settings> {
+  final AuthService _auth = AuthService();
   bool _enabled = false;
 
   @override
@@ -161,7 +164,14 @@ class _SettingsState extends State<Settings> {
                   minWidth: 350,
                   height: 45,
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await _auth.signOut();
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => Wrapper()),
+                          ModalRoute.withName('/wrapper'));
+                    },
                     child: Text(
                       'Log Out',
                       style: TextStyle(

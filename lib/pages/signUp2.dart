@@ -7,6 +7,7 @@ class SignUp2 extends StatefulWidget {
 }
 
 class _SignUp2State extends State<SignUp2> {
+  String status;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +31,11 @@ class _SignUp2State extends State<SignUp2> {
                 FlatButton(
                   color: Colors.white,
                   onPressed: () {
-                    print('hi');
+                    setState(() {
+                      status = 'Student';
+
+                      Navigator.pushNamed(context, '/home1');
+                    });
                   },
                   child: Text(
                     "College Student",
@@ -51,7 +56,10 @@ class _SignUp2State extends State<SignUp2> {
                 FlatButton(
                   color: Colors.white,
                   onPressed: () {
-                    print('hi');
+                    setState(() {
+                      status = 'Tutor';
+                      Navigator.pushNamed(context, '/home1');
+                    });
                   },
                   child: Text(
                     "Tutor",
