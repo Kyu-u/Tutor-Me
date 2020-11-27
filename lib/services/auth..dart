@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tutor_me/models/user.dart';
 import 'package:provider/provider.dart';
+import 'package:tutor_me/services/database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -26,8 +27,40 @@ class AuthService {
     }
   }
 
+  //register
+
+  Future register(String email, String password) async {
+    try {
+      AuthResult result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      FirebaseUser user = result.user;
+
+      await DatabaseService(uid: user.uid)
+          .updateUserData("none", "none", "none");
+      return _userFromFireBaseUser(user);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   //sign in email
+  Future signIn(String email, String password) async {
+    try {
+      AuthResult result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      FirebaseUser user = result.user;
+      return _userFromFireBaseUser(user);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   //sign out
-
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

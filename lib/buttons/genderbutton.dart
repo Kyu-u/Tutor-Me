@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Gender extends StatefulWidget {
@@ -6,7 +7,9 @@ class Gender extends StatefulWidget {
 }
 
 class _GenderState extends State<Gender> {
-  String _value;
+  // final CollectionReference reference = Firestore.instance.collection("users");
+
+  String gender;
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
@@ -42,21 +45,21 @@ class _GenderState extends State<Gender> {
               fontSize: 15,
             ),
           ),
-          value: 'one',
+          value: 'Male',
         ),
         DropdownMenuItem<String>(
           child: Text('Female'),
-          value: 'two',
+          value: 'Female',
         ),
       ],
       validator: (value) => value == null ? 'Please fill in your gender' : null,
       onChanged: (String value) {
         setState(() {
-          _value = value;
+          gender = value;
         });
       },
       hint: Text('Gender'),
-      value: _value,
+      value: gender,
     );
   }
 }

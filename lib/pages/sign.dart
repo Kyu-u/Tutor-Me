@@ -8,6 +8,7 @@ class Sign extends StatelessWidget {
     final TapGestureRecognizer _gestureRecognizer = TapGestureRecognizer()
       ..onTap = () {
         print("tapped");
+        Navigator.pushNamed(context, '/signup1');
       };
     return Scaffold(
       backgroundColor: HexColor("6088f6"),
@@ -19,10 +20,10 @@ class Sign extends StatelessWidget {
               FlatButton(
                 color: Colors.white,
                 onPressed: () {
-                  Navigator.pushNamed(context, '/signup1');
+                  Navigator.pushNamed(context, '/signin');
                 },
                 child: Text(
-                  "Sign up",
+                  "Sign in",
                   style: TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: 20,
@@ -40,14 +41,14 @@ class Sign extends StatelessWidget {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: 'Already have an account?',
+                      text: "Don't have an account?",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                         fontFamily: 'Montserrat',
                       )),
                   TextSpan(
-                    text: 'Sign in',
+                    text: 'Sign up',
                     style: TextStyle(
                       color: Colors.lightGreen,
                       fontSize: 15,
